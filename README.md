@@ -35,3 +35,21 @@ ___
 ___
 ## Выбор параметров для SVM
 
+---
+## Выбор параметров для модели KNN
+error_rate = []
+for i in range(1, 40):
+	knn = KNeighborsClassifier(n_neighbors=i)
+	knn.fit(x_train_d3_dj, y_train_d3_dj)
+	pred_i = knn.predict(x_test_d3_dj)
+	error_rate.append(np.mean(pred_i != y_test_d3_dj))
+
+plt.figure(figsize=(10, 3))
+plt.plot(range(1, 40), error_rate, color='blue',
+		linestyle='dashed', marker='o',
+		markerfacecolor='red', markersize=10)
+
+plt.title('Error Rate vs. K Value')
+plt.xlabel('K')
+plt.ylabel('Error Rate')
+plt.show()
